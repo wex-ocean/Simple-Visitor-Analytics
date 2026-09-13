@@ -13,6 +13,6 @@ class SVA_Deactivator {
 	 * @return void
 	 */
 	public static function deactivate() {
-		// Reserved for unscheduling plugin events when they are introduced.
+		SVA_Aggregator::unschedule();
 	}
 }

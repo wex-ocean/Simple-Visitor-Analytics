@@ -51,6 +51,7 @@ class SVA_Activator {
 			uniques bigint(20) unsigned NOT NULL DEFAULT 0,
 			device_breakdown longtext NOT NULL,
 			referrer_breakdown longtext NOT NULL,
+			country_breakdown longtext NOT NULL,
 			PRIMARY KEY  (date,url_id),
 			KEY url_id (url_id),
 			KEY date (date)
@@ -72,5 +73,7 @@ class SVA_Activator {
 		if ( false === get_option( 'sva_settings', false ) ) {
 			add_option( 'sva_settings', $defaults );
 		}
+
+		SVA_Aggregator::schedule();
 	}
 }
