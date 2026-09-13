@@ -1,0 +1,17 @@
+.sva-dashboard { max-width: 1400px; }
+.sva-toolbar { display: flex; align-items: center; gap: 8px; margin: 18px 0; }
+.sva-cards, .sva-grid, .sva-breakdowns { display: grid; gap: 16px; margin: 16px 0; }
+.sva-cards { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.sva-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.sva-breakdowns { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.sva-card, .sva-panel { background: #fff; border: 1px solid #dcdcde; padding: 18px; box-sizing: border-box; }
+.sva-card { display: flex; flex-direction: column; gap: 8px; }
+.sva-card span { color: #50575e; font-size: 13px; }
+.sva-card strong { color: #173f4f; font-size: 28px; line-height: 1.1; }
+.sva-panel h2 { font-size: 16px; margin: 0 0 16px; }
+.sva-chart-wrap { height: 320px; position: relative; }
+.sva-small-chart { height: 220px; position: relative; }
+.sva-country-list { display: flex; flex-wrap: wrap; gap: 10px 24px; }
+.sva-country-list span { min-width: 120px; }
+@media (max-width: 900px) { .sva-grid, .sva-breakdowns { grid-template-columns: 1fr; } }
+@media (max-width: 600px) { .sva-cards { grid-template-columns: 1fr; } .sva-toolbar { align-items: flex-start; flex-direction: column; } }
