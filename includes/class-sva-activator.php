@@ -64,6 +64,8 @@ class SVA_Activator {
 			'exclude_logged_in'       => true,
 			'respect_dnt'             => false,
 			'retention_days'          => 90,
+			'exclude_ips'             => array(),
+			'exclude_pages'           => array(),
 			'delete_data_on_uninstall' => false,
 		);
 
