@@ -8,11 +8,19 @@
 class SVA_Tracker {
 
 	/**
+	 * Local country resolver.
+	 *
+	 * @var SVA_GeoIP
+	 */
+	private $geoip;
+
+	/**
 	 * Register tracker hooks.
 	 *
 	 * @return void
 	 */
 	public function __construct() {
+		$this->geoip = new SVA_GeoIP();
 		add_action( 'rest_api_init', array( $this, 'register_route' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_tracker' ) );
 	}
@@ -96,6 +104,7 @@ class SVA_Tracker {
 		$title      = sanitize_text_field( $request->get_param( 'title' ) );
 		$referrer   = esc_url_raw( $request->get_param( 'referrer' ) );
 		$user_agent = isset( $_SERVER['HTTP_USER_AGENT'] ) ? sanitize_text_field( wp_unslash( $_SERVER['HTTP_USER_AGENT'] ) ) : '';
+		$country    = $this->geoip->lookup_country( $this->remote_ip() );
 
 		global $wpdb;
 		$urls_table = $wpdb->prefix . 'sva_urls';
@@ -120,7 +129,7 @@ class SVA_Tracker {
 				'device'       => $this->detect_device( $user_agent ),
 				'browser'      => $this->detect_browser( $user_agent ),
 				'os'            => $this->detect_os( $user_agent ),
-				'country'      => '',
+				'country'      => $country ? $country : '',
 				'created_at'   => current_time( 'mysql', true ),
 			),
 			array( '%d', '%s', '%s', '%s', '%s', '%s', '%s', '%s' )

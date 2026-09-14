@@ -23,6 +23,7 @@ define( 'SVA_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 
 require_once SVA_PLUGIN_DIR . 'includes/class-sva-activator.php';
 require_once SVA_PLUGIN_DIR . 'includes/class-sva-deactivator.php';
+require_once SVA_PLUGIN_DIR . 'includes/class-sva-geoip.php';
 require_once SVA_PLUGIN_DIR . 'includes/class-sva-tracker.php';
 require_once SVA_PLUGIN_DIR . 'includes/class-sva-aggregator.php';
 require_once SVA_PLUGIN_DIR . 'includes/class-sva-admin.php';

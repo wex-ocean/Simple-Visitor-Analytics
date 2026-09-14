@@ -19,6 +19,7 @@ class SVA_Settings {
 		add_action( 'admin_menu', array( $this, 'add_submenu' ) );
 		add_action( 'admin_init', array( $this, 'register_settings' ) );
 		add_action( 'admin_post_sva_delete_data', array( $this, 'delete_data' ) );
+		add_action( 'admin_post_sva_update_geoip', array( $this, 'update_geoip' ) );
 	}
 
 	/**
@@ -75,11 +76,17 @@ class SVA_Settings {
 		}
 
 		$settings_deleted = isset( $_GET['sva_deleted'] ) && '1' === sanitize_text_field( wp_unslash( $_GET['sva_deleted'] ) );
+		$geoip_status     = isset( $_GET['sva_geoip'] ) ? sanitize_text_field( wp_unslash( $_GET['sva_geoip'] ) ) : '';
 		?>
 		<div class="wrap">
 			<h1><?php esc_html_e( 'Analytics Settings', 'simple-visitor-analytics' ); ?></h1>
 			<?php if ( $settings_deleted ) : ?>
 				<div class="notice notice-success is-dismissible"><p><?php esc_html_e( 'Analytics hit and aggregate data has been deleted. Your settings were kept.', 'simple-visitor-analytics' ); ?></p></div>
+			<?php endif; ?>
+			<?php if ( 'updated' === $geoip_status ) : ?>
+				<div class="notice notice-success is-dismissible"><p><?php esc_html_e( 'The local GeoIP database was updated.', 'simple-visitor-analytics' ); ?></p></div>
+			<?php elseif ( 'error' === $geoip_status ) : ?>
+				<div class="notice notice-error is-dismissible"><p><?php esc_html_e( 'The GeoIP database could not be updated. Upload a valid .mmdb file.', 'simple-visitor-analytics' ); ?></p></div>
 			<?php endif; ?>
 			<form method="post" action="options.php">
 				<?php
@@ -87,6 +94,17 @@ class SVA_Settings {
 				do_settings_sections( self::PAGE_SLUG );
 				submit_button();
 				?>
+			</form>
+			<hr>
+			<h2><?php esc_html_e( 'Country data', 'simple-visitor-analytics' ); ?></h2>
+			<p><?php esc_html_e( 'Country lookup uses a local MaxMind GeoLite2-Country database. No database is downloaded automatically and no external request is made for a pageview.', 'simple-visitor-analytics' ); ?></p>
+			<p><?php esc_html_e( 'GeoLite2 data is provided by MaxMind and is available under the GeoLite2 End User License Agreement. MaxMind attribution is required when using this database.', 'simple-visitor-analytics' ); ?></p>
+			<form method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" enctype="multipart/form-data">
+				<input type="hidden" name="action" value="sva_update_geoip">
+				<?php wp_nonce_field( 'sva_update_geoip_database', 'sva_geoip_nonce' ); ?>
+				<label for="sva_geoip_database"><strong><?php esc_html_e( 'GeoLite2-Country .mmdb file', 'simple-visitor-analytics' ); ?></strong></label>
+				<input type="file" id="sva_geoip_database" name="sva_geoip_database" accept=".mmdb,application/octet-stream" required>
+				<?php submit_button( __( 'Update GeoIP Database', 'simple-visitor-analytics' ), 'secondary', 'submit', false ); ?>
 			</form>
 			<hr>
 			<h2><?php esc_html_e( 'Delete all analytics data', 'simple-visitor-analytics' ); ?></h2>
@@ -140,6 +158,25 @@ class SVA_Settings {
 		}
 
 		$url = add_query_arg( array( 'page' => self::PAGE_SLUG, 'sva_deleted' => '1' ), admin_url( 'admin.php' ) );
+		wp_safe_redirect( $url );
+		exit;
+	}
+
+	/**
+	 * Install a manually uploaded local GeoIP database.
+	 *
+	 * @return void
+	 */
+	public function update_geoip() {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_die( esc_html__( 'You do not have permission to update the GeoIP database.', 'simple-visitor-analytics' ) );
+		}
+
+		check_admin_referer( 'sva_update_geoip_database', 'sva_geoip_nonce' );
+		$file   = isset( $_FILES['sva_geoip_database'] ) ? $_FILES['sva_geoip_database'] : array();
+		$result = SVA_GeoIP::install_uploaded_database( $file );
+		$status = is_wp_error( $result ) ? 'error' : 'updated';
+		$url    = add_query_arg( array( 'page' => self::PAGE_SLUG, 'sva_geoip' => $status ), admin_url( 'admin.php' ) );
 		wp_safe_redirect( $url );
 		exit;
 	}

@@ -24,6 +24,7 @@ Analytics data is stored locally in your WordPress database. Raw hits are short-
 * Daily aggregated statistics for fast dashboard queries.
 * Configurable retention and privacy exclusions.
 * Data is kept on uninstall unless deletion is explicitly enabled.
+* Optional local MaxMind GeoLite2-Country lookup with no per-pageview network requests.
 
 == Installation ==
 
@@ -48,6 +49,8 @@ Data is retained by default. Enable the delete-data-on-uninstall setting before 
 == Privacy ==
 
 This plugin stores analytics data in the site's own WordPress database. Site owners should review their configuration and privacy policy to ensure they meet applicable legal requirements.
+
+Optional country-level lookup uses a locally installed MaxMind GeoLite2-Country database. The plugin does not download the database automatically or contact an external GeoIP service during tracking. GeoLite2 data is provided by MaxMind and is subject to the GeoLite2 End User License Agreement; required MaxMind attribution must be retained.
 
 == Changelog ==
 
