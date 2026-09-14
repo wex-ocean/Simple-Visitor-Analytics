@@ -27,6 +27,7 @@ require_once SVA_PLUGIN_DIR . 'includes/class-sva-tracker.php';
 require_once SVA_PLUGIN_DIR . 'includes/class-sva-aggregator.php';
 require_once SVA_PLUGIN_DIR . 'includes/class-sva-admin.php';
 require_once SVA_PLUGIN_DIR . 'includes/class-sva-settings.php';
+require_once SVA_PLUGIN_DIR . 'includes/class-sva-privacy.php';
 
 register_activation_hook( __FILE__, array( 'SVA_Activator', 'activate' ) );
 register_deactivation_hook( __FILE__, array( 'SVA_Deactivator', 'deactivate' ) );
@@ -35,3 +36,4 @@ new SVA_Tracker();
 new SVA_Aggregator();
 new SVA_Admin();
 new SVA_Settings();
+new SVA_Privacy();
