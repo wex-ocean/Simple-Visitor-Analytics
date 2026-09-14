@@ -1,0 +1,13 @@
+.git
+.github
+.gitattributes
+.distignore
+plan.md
+*.zip
+node_modules
+build
+tests
+composer.json
+composer.lock
+npm-shrinkwrap.json
+package-lock.json

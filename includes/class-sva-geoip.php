@@ -3,6 +3,7 @@
  * Resolves country codes from a local MaxMind GeoLite2-Country database.
  *
  * @package SimpleVisitorAnalytics
+ * @license GPLv2
  */
 
 class SVA_GeoIP {

@@ -3,6 +3,7 @@
  * Registers the analytics dashboard.
  *
  * @package SimpleVisitorAnalytics
+ * @license GPLv2
  */
 
 class SVA_Admin {

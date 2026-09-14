@@ -1,0 +1,8 @@
+.git export-ignore
+.github export-ignore
+.distignore export-ignore
+plan.md export-ignore
+*.zip export-ignore
+node_modules export-ignore
+build export-ignore
+tests export-ignore

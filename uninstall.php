@@ -3,6 +3,7 @@
  * Remove plugin data when the site owner has opted in.
  *
  * @package SimpleVisitorAnalytics
+ * @license GPLv2
  */
 
 defined( 'WP_UNINSTALL_PLUGIN' ) || exit;

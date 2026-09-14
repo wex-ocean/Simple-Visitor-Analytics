@@ -13,6 +13,7 @@
  * Domain Path: /languages
  *
  * @package SimpleVisitorAnalytics
+ * @license GPLv2
  */
 
 defined( 'ABSPATH' ) || exit;

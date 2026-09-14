@@ -3,6 +3,7 @@
  * Fired during plugin deactivation.
  *
  * @package SimpleVisitorAnalytics
+ * @license GPLv2
  */
 
 class SVA_Deactivator {

@@ -3,6 +3,7 @@
  * Integrates Simple Visitor Analytics with WordPress privacy tools.
  *
  * @package SimpleVisitorAnalytics
+ * @license GPLv2
  */
 
 class SVA_Privacy {

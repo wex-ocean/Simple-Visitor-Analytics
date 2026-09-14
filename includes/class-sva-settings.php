@@ -3,6 +3,7 @@
  * Registers the analytics settings screen.
  *
  * @package SimpleVisitorAnalytics
+ * @license GPLv2
  */
 
 class SVA_Settings {

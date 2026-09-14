@@ -3,6 +3,7 @@
  * Analytics dashboard view.
  *
  * @package SimpleVisitorAnalytics
+ * @license GPLv2
  */
 
 defined( 'ABSPATH' ) || exit;

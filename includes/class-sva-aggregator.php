@@ -3,6 +3,7 @@
  * Aggregates raw hits and prunes expired data.
  *
  * @package SimpleVisitorAnalytics
+ * @license GPLv2
  */
 
 class SVA_Aggregator {

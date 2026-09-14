@@ -3,6 +3,7 @@
  * Registers the frontend beacon and records pageview hits.
  *
  * @package SimpleVisitorAnalytics
+ * @license GPLv2
  */
 
 class SVA_Tracker {
