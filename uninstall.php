@@ -22,6 +22,7 @@ $tables = array(
 );
 
 foreach ( $tables as $table ) {
+	// Table names are built only from the trusted WordPress prefix and fixed suffixes.
 	$wpdb->query( "DROP TABLE IF EXISTS `{$table}`" );
 }
 

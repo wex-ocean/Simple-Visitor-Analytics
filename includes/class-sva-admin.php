@@ -48,7 +48,7 @@ class SVA_Admin {
 		}
 
 		wp_enqueue_style( 'sva-dashboard', SVA_PLUGIN_URL . 'admin/css/dashboard.css', array(), SVA_VERSION );
-		wp_enqueue_script( 'sva-chartjs', 'https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js', array(), '4.4.7', true );
+		wp_enqueue_script( 'sva-chartjs', SVA_PLUGIN_URL . 'admin/js/chart.umd.js', array(), '4.4.7', true );
 		wp_enqueue_script( 'sva-dashboard', SVA_PLUGIN_URL . 'admin/js/dashboard.js', array( 'sva-chartjs' ), SVA_VERSION, true );
 		wp_localize_script( 'sva-dashboard', 'SVA_DASHBOARD_DATA', $this->get_dashboard_data() );
 	}
@@ -100,6 +100,13 @@ class SVA_Admin {
 			'browser'     => array(),
 			'os'          => array(),
 			'generated_at' => current_time( 'mysql' ),
+			'labels'      => array(
+				'pageviews' => __( 'Pageviews', 'simple-visitor-analytics' ),
+				'uniques'   => __( 'Uniques', 'simple-visitor-analytics' ),
+				'devices'   => __( 'Devices', 'simple-visitor-analytics' ),
+				'browsers'  => __( 'Browsers', 'simple-visitor-analytics' ),
+				'os'        => __( 'Operating systems', 'simple-visitor-analytics' ),
+			),
 		);
 		$pages = array();
 
@@ -147,11 +154,24 @@ class SVA_Admin {
 		return $data;
 	}
 
+	/**
+	 * Decode a stored JSON breakdown safely.
+	 *
+	 * @param string $value JSON value.
+	 * @return array
+	 */
 	private function decode_json( $value ) {
 		$decoded = json_decode( (string) $value, true );
 		return is_array( $decoded ) ? $decoded : array();
 	}
 
+	/**
+	 * Merge breakdown counts into a dashboard total.
+	 *
+	 * @param array $target Aggregate output.
+	 * @param array $counts Breakdown counts.
+	 * @return void
+	 */
 	private function merge_counts( &$target, $counts ) {
 		foreach ( $counts as $label => $count ) {
 			$label = sanitize_text_field( $label );

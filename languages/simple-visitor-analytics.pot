@@ -1,0 +1,269 @@
+# Simple Visitor Analytics translation template.
+# Copyright (C) 2026 Simple Visitor Analytics Contributors
+msgid ""
+msgstr ""
+"Project-Id-Version: Simple Visitor Analytics 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/simple-visitor-analytics/\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: includes/class-sva-admin.php
+msgid "Analytics"
+msgstr ""
+
+#: includes/class-sva-admin.php
+msgid "You do not have permission to view analytics."
+msgstr ""
+
+#: includes/class-sva-admin.php
+msgid "Pageviews"
+msgstr ""
+
+#: includes/class-sva-admin.php
+msgid "Uniques"
+msgstr ""
+
+#: includes/class-sva-admin.php
+msgid "Devices"
+msgstr ""
+
+#: includes/class-sva-admin.php
+msgid "Browsers"
+msgstr ""
+
+#: includes/class-sva-admin.php
+msgid "Operating systems"
+msgstr ""
+
+#: includes/class-sva-geoip.php
+msgid "The GeoIP database upload failed."
+msgstr ""
+
+#: includes/class-sva-geoip.php
+msgid "Please upload a .mmdb MaxMind database file."
+msgstr ""
+
+#: includes/class-sva-geoip.php
+msgid "The uploaded GeoIP database is invalid."
+msgstr ""
+
+#: includes/class-sva-geoip.php
+msgid "The GeoIP database directory could not be created."
+msgstr ""
+
+#: includes/class-sva-geoip.php
+msgid "The GeoIP database could not be stored."
+msgstr ""
+
+#: includes/class-sva-privacy.php
+msgid "Simple Visitor Analytics"
+msgstr ""
+
+#: includes/class-sva-privacy.php
+msgid "Simple Visitor Analytics does not store personal data linked to an individual email address."
+msgstr ""
+
+#: includes/class-sva-privacy.php
+msgid "Simple Visitor Analytics collects privacy-focused, aggregate website usage data. It does not use cookies or persistent visitor identifiers, and it does not store raw IP addresses."
+msgstr ""
+
+#: includes/class-sva-privacy.php
+msgid "For daily uniqueness estimates, the plugin hashes an anonymized IP address (the last IPv4 octet is removed), the browser user agent, a site salt, and the current date. The daily salt means the resulting visitor hash is rotated and is not intended to identify an individual or track visitors across sites."
+msgstr ""
+
+#: includes/class-sva-privacy.php
+msgid "When country information is available, only a country code is retained. No city-level location data is stored. Analytics data is stored in this site's own WordPress database and is subject to the site owner's configured retention period."
+msgstr ""
+
+#: includes/class-sva-settings.php
+msgid "Analytics Settings"
+msgstr ""
+
+#: includes/class-sva-settings.php
+msgid "Settings"
+msgstr ""
+
+#: includes/class-sva-settings.php
+msgid "Privacy and retention"
+msgstr ""
+
+#: includes/class-sva-settings.php
+msgid "Exclude admins and logged-in users"
+msgstr ""
+
+#: includes/class-sva-settings.php
+msgid "Exclude specific IPs"
+msgstr ""
+
+#: includes/class-sva-settings.php
+msgid "One IP address per line."
+msgstr ""
+
+#: includes/class-sva-settings.php
+msgid "Exclude specific pages or post types"
+msgstr ""
+
+#: includes/class-sva-settings.php
+msgid "Enter one URL fragment or post type per line."
+msgstr ""
+
+#: includes/class-sva-settings.php
+msgid "Raw data retention"
+msgstr ""
+
+#: includes/class-sva-settings.php
+msgid "30 days"
+msgstr ""
+
+#: includes/class-sva-settings.php
+msgid "90 days"
+msgstr ""
+
+#: includes/class-sva-settings.php
+msgid "180 days"
+msgstr ""
+
+#: includes/class-sva-settings.php
+msgid "365 days"
+msgstr ""
+
+#: includes/class-sva-settings.php
+msgid "Forever"
+msgstr ""
+
+#: includes/class-sva-settings.php
+msgid "Respect Do Not Track"
+msgstr ""
+
+#: includes/class-sva-settings.php
+msgid "Delete data on uninstall"
+msgstr ""
+
+#: includes/class-sva-settings.php
+msgid "You do not have permission to manage analytics settings."
+msgstr ""
+
+#: includes/class-sva-settings.php
+msgid "Analytics hit and aggregate data has been deleted. Your settings were kept."
+msgstr ""
+
+#: includes/class-sva-settings.php
+msgid "The local GeoIP database was updated."
+msgstr ""
+
+#: includes/class-sva-settings.php
+msgid "The GeoIP database could not be updated. Upload a valid .mmdb file."
+msgstr ""
+
+#: includes/class-sva-settings.php
+msgid "Country data"
+msgstr ""
+
+#: includes/class-sva-settings.php
+msgid "Country lookup uses a local MaxMind GeoLite2-Country database. No database is downloaded automatically and no external request is made for a pageview."
+msgstr ""
+
+#: includes/class-sva-settings.php
+msgid "GeoLite2 data is provided by MaxMind and is available under the GeoLite2 End User License Agreement. MaxMind attribution is required when using this database."
+msgstr ""
+
+#: includes/class-sva-settings.php
+msgid "GeoLite2-Country .mmdb file"
+msgstr ""
+
+#: includes/class-sva-settings.php
+msgid "Update GeoIP Database"
+msgstr ""
+
+#: includes/class-sva-settings.php
+msgid "Delete all analytics data"
+msgstr ""
+
+#: includes/class-sva-settings.php
+msgid "This removes all raw hits and daily aggregates but keeps your settings."
+msgstr ""
+
+#: includes/class-sva-settings.php
+msgid "Delete all analytics data now?"
+msgstr ""
+
+#: includes/class-sva-settings.php
+msgid "You do not have permission to delete analytics data."
+msgstr ""
+
+#: includes/class-sva-settings.php
+msgid "You do not have permission to update the GeoIP database."
+msgstr ""
+
+#: includes/class-sva-settings.php
+msgid "Enabled"
+msgstr ""
+
+#: includes/class-sva-tracker.php
+msgid "Invalid analytics request."
+msgstr ""
+
+#: includes/class-sva-tracker.php
+msgid "Invalid page URL."
+msgstr ""
+
+#: admin/views/dashboard.php
+msgid "Period"
+msgstr ""
+
+#: admin/views/dashboard.php
+msgid "Daily"
+msgstr ""
+
+#: admin/views/dashboard.php
+msgid "Weekly"
+msgstr ""
+
+#: admin/views/dashboard.php
+msgid "Monthly"
+msgstr ""
+
+#: admin/views/dashboard.php
+msgid "Custom range"
+msgstr ""
+
+#: admin/views/dashboard.php
+msgid "Start date"
+msgstr ""
+
+#: admin/views/dashboard.php
+msgid "End date"
+msgstr ""
+
+#: admin/views/dashboard.php
+msgid "Average pages / session"
+msgstr ""
+
+#: admin/views/dashboard.php
+msgid "Traffic over time"
+msgstr ""
+
+#: admin/views/dashboard.php
+msgid "Page"
+msgstr ""
+
+#: admin/views/dashboard.php
+msgid "Top pages"
+msgstr ""
+
+#: admin/views/dashboard.php
+msgid "Traffic sources"
+msgstr ""
+
+#: admin/views/dashboard.php
+msgid "No aggregated data yet."
+msgstr ""
+
+#: admin/views/dashboard.php
+msgid "Countries"
+msgstr ""

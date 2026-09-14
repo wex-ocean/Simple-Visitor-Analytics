@@ -65,11 +65,14 @@ class SVA_Aggregator {
 		if ( false !== $cutoff ) {
 			$where   = ' WHERE created_at >= %s';
 			$values[] = $cutoff;
+		} else {
+			$where    = ' WHERE 1 = %d';
+			$values[] = 1;
 		}
 
 		$sql = "SELECT url_id, visitor_hash, referrer, device, browser, os, country, created_at
 			FROM {$hits_table}{$where} ORDER BY created_at ASC";
-		$hits = $values ? $wpdb->get_results( $wpdb->prepare( $sql, $values ) ) : $wpdb->get_results( $sql );
+		$hits = $wpdb->get_results( $wpdb->prepare( $sql, $values ) );
 		$groups = array();
 
 		foreach ( $hits as $hit ) {
@@ -141,6 +144,12 @@ class SVA_Aggregator {
 		$this->delete_expired_hits( $this->retention_cutoff() );
 	}
 
+	/**
+	 * Delete raw hits older than a cutoff date.
+	 *
+	 * @param string|false $cutoff UTC cutoff or false for unlimited retention.
+	 * @return void
+	 */
 	private function delete_expired_hits( $cutoff ) {
 		if ( false === $cutoff ) {
 			return;
@@ -151,6 +160,11 @@ class SVA_Aggregator {
 		$wpdb->query( $wpdb->prepare( "DELETE FROM {$hits_table} WHERE created_at < %s", $cutoff ) );
 	}
 
+	/**
+	 * Calculate the configured raw-hit retention cutoff.
+	 *
+	 * @return string|false
+	 */
 	private function retention_cutoff() {
 		$settings = get_option( 'sva_settings', array() );
 		$days     = isset( $settings['retention_days'] ) ? $settings['retention_days'] : 90;
@@ -163,6 +177,13 @@ class SVA_Aggregator {
 		return gmdate( 'Y-m-d H:i:s', time() - ( $days * DAY_IN_SECONDS ) );
 	}
 
+	/**
+	 * Increment a named breakdown bucket.
+	 *
+	 * @param array  $breakdown Breakdown values.
+	 * @param string $key       Bucket name.
+	 * @return void
+	 */
 	private function increment( &$breakdown, $key ) {
 		if ( ! isset( $breakdown[ $key ] ) ) {
 			$breakdown[ $key ] = 0;

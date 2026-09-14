@@ -154,7 +154,7 @@ class SVA_Settings {
 		$tables = array( $wpdb->prefix . 'sva_hits', $wpdb->prefix . 'sva_stats_daily' );
 
 		foreach ( $tables as $table ) {
-			$wpdb->query( "DELETE FROM {$table}" );
+			$wpdb->query( $wpdb->prepare( "DELETE FROM {$table} WHERE 1 = %d", 1 ) );
 		}
 
 		$url = add_query_arg( array( 'page' => self::PAGE_SLUG, 'sva_deleted' => '1' ), admin_url( 'admin.php' ) );
@@ -181,6 +181,12 @@ class SVA_Settings {
 		exit;
 	}
 
+	/**
+	 * Render a boolean settings field.
+	 *
+	 * @param array $args Field arguments.
+	 * @return void
+	 */
 	public function checkbox_field( $args ) {
 		$settings = get_option( self::OPTION, array() );
 		$key      = $args['label_for'];
@@ -188,6 +194,12 @@ class SVA_Settings {
 		printf( '<label><input type="checkbox" id="%1$s" name="%2$s[%1$s]" value="1" %3$s> %4$s</label>', esc_attr( $key ), esc_attr( self::OPTION ), checked( $checked, true, false ), esc_html__( 'Enabled', 'simple-visitor-analytics' ) );
 	}
 
+	/**
+	 * Render a line-based textarea settings field.
+	 *
+	 * @param array $args Field arguments.
+	 * @return void
+	 */
 	public function textarea_field( $args ) {
 		$settings = get_option( self::OPTION, array() );
 		$key      = $args['label_for'];
@@ -198,10 +210,21 @@ class SVA_Settings {
 		}
 	}
 
+	/**
+	 * Render the retention period selector.
+	 *
+	 * @return void
+	 */
 	public function retention_field() {
 		$settings = get_option( self::OPTION, array() );
 		$current  = isset( $settings['retention_days'] ) ? (string) $settings['retention_days'] : '90';
-		$options  = array( '30' => '30 days', '90' => '90 days', '180' => '180 days', '365' => '365 days', 'forever' => 'Forever' );
+		$options  = array(
+			'30'      => __( '30 days', 'simple-visitor-analytics' ),
+			'90'      => __( '90 days', 'simple-visitor-analytics' ),
+			'180'     => __( '180 days', 'simple-visitor-analytics' ),
+			'365'     => __( '365 days', 'simple-visitor-analytics' ),
+			'forever' => __( 'Forever', 'simple-visitor-analytics' ),
+		);
 		echo '<select id="retention_days" name="' . esc_attr( self::OPTION ) . '[retention_days]">';
 		foreach ( $options as $value => $label ) {
 			printf( '<option value="%1$s" %2$s>%3$s</option>', esc_attr( $value ), selected( $current, $value, false ), esc_html( $label ) );
@@ -209,6 +232,13 @@ class SVA_Settings {
 		echo '</select>';
 	}
 
+	/**
+	 * Sanitize newline-separated settings values.
+	 *
+	 * @param string $value Submitted lines.
+	 * @param bool   $ips   Whether to keep only valid IP addresses.
+	 * @return array
+	 */
 	private function sanitize_lines( $value, $ips ) {
 		$lines = preg_split( '/\r\n|\r|\n/', sanitize_textarea_field( wp_unslash( (string) $value ) ) );
 		$lines = array_filter( array_map( 'trim', $lines ) );

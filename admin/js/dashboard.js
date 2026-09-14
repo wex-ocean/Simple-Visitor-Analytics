@@ -1,6 +1,7 @@
 (function () {
 	'use strict';
 	var data = window.SVA_DASHBOARD_DATA || {rows: []};
+	var chartLabels = data.labels || {};
 	var lineChart;
 	var colors = ['#176b87', '#d96c4f', '#e0a458', '#4e8c6a', '#8b6f9e', '#2f4858'];
 	var period = document.getElementById('sva-period');
@@ -38,8 +39,8 @@
 		if (!window.Chart || !canvas) return;
 		if (lineChart) lineChart.destroy();
 		lineChart = new Chart(canvas, {type: 'line', data: {labels: labels, datasets: [
-			{label: 'Pageviews', data: labels.map(function (label) { return buckets[label].pageviews; }), borderColor: colors[0], backgroundColor: 'rgba(23,107,135,.12)', fill: true, tension: .25},
-			{label: 'Uniques', data: labels.map(function (label) { return buckets[label].uniques; }), borderColor: colors[1], backgroundColor: 'transparent', tension: .25}
+			{label: chartLabels.pageviews, data: labels.map(function (label) { return buckets[label].pageviews; }), borderColor: colors[0], backgroundColor: 'rgba(23,107,135,.12)', fill: true, tension: .25},
+			{label: chartLabels.uniques, data: labels.map(function (label) { return buckets[label].uniques; }), borderColor: colors[1], backgroundColor: 'transparent', tension: .25}
 		]}, options: {responsive: true, maintainAspectRatio: false, scales: {y: {beginAtZero: true}}}});
 	}
 
@@ -64,7 +65,7 @@
 	document.getElementById('sva-end-date').addEventListener('change', function () { updateSummary(); updateLineChart(); });
 	updateSummary();
 	updateLineChart();
-	breakdownChart('sva-device-chart', 'Devices', data.device);
-	breakdownChart('sva-browser-chart', 'Browsers', data.browser);
-	breakdownChart('sva-os-chart', 'Operating systems', data.os);
+	breakdownChart('sva-device-chart', chartLabels.devices, data.device);
+	breakdownChart('sva-browser-chart', chartLabels.browsers, data.browser);
+	breakdownChart('sva-os-chart', chartLabels.os, data.os);
 }());

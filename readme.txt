@@ -46,13 +46,28 @@ No. Raw IP addresses are not stored. Visitor uniqueness uses a short-lived, priv
 
 Data is retained by default. Enable the delete-data-on-uninstall setting before uninstalling if you want the plugin to remove its tables and settings.
 
+= Does the plugin contact an external GeoIP service? =
+
+No. Country lookup is optional and uses a locally installed MaxMind GeoLite2-Country database. The plugin makes no GeoIP network request during pageview tracking.
+
 == Privacy ==
 
 This plugin stores analytics data in the site's own WordPress database. Site owners should review their configuration and privacy policy to ensure they meet applicable legal requirements.
 
 Optional country-level lookup uses a locally installed MaxMind GeoLite2-Country database. The plugin does not download the database automatically or contact an external GeoIP service during tracking. GeoLite2 data is provided by MaxMind and is subject to the GeoLite2 End User License Agreement; required MaxMind attribution must be retained.
 
+== Screenshots ==
+
+1. Analytics dashboard with overview cards, traffic chart, top pages, and traffic sources.
+2. Analytics settings with privacy controls, retention options, and manual GeoIP database update.
+
 == Changelog ==
 
 = 1.0.0 =
-* Initial release.
+* Phase 1: Added privacy-focused frontend beacon and REST hit logging.
+* Phase 2: Added hourly aggregation and retention cleanup.
+* Phase 3: Added the Analytics dashboard and aggregate breakdowns.
+* Phase 4: Added privacy, exclusion, retention, and data deletion settings.
+* Phase 5: Added WordPress privacy exporter and eraser hooks.
+* Phase 6: Added optional local MaxMind GeoLite2-Country integration.
+* Phase 7: Added internationalization catalog and wp.org preparation polish.
